@@ -1,5 +1,7 @@
+using AutoMapper;
 using InterestService.Application.DTO;
 using InterestService.Application.Interfaces;
+using InterestService.Application.Mapping;
 using InterestService.Repository.Data;
 using InterestService.Repository.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddScoped<IEmi, EmiRepo>();
-
+builder.Services.AddAutoMapper(typeof(MapperConfig));
 builder.Services.AddHttpClient<EmiClient>(client => {
   client.BaseAddress = new Uri(builder.Configuration["LoanTable"] ?? "https://loantable-gwgga4c8dndyc2bd.canadacentral-01.azurewebsites.net");
 });

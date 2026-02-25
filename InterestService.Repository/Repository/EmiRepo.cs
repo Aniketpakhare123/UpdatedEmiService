@@ -2,6 +2,8 @@ using InterestService.Application.DTO;
 using InterestService.Application.Interfaces;
 using InterestService.Domain.Model;
 using InterestService.Repository.Data;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +16,12 @@ namespace InterestService.Repository.Repository
   {
     EmiClient emiClient;
     private readonly ApplicationDbContext _context;
-    public EmiRepo(EmiClient client,ApplicationDbContext context) {
+    IMapper mapper;
+    
+    public EmiRepo(EmiClient client,ApplicationDbContext context,IMapper mapper) {
       this.emiClient = client;
       this._context = context;
+      this.mapper = mapper;
     }
 
 
@@ -99,7 +104,12 @@ namespace InterestService.Repository.Repository
       return schedule;
     }
 
+      public async Task<List<LoanEmiSchedule>> GetEmischedule(int id) {
+        var data = await _context.EmiSchedules.Where(e => e.loanId == id).ToListAsync();
+        var m = mapper.Map<List<LoanEmiSchedule>>(data);
+        return m;
+      }
 
 
-  }
+    }
 }
