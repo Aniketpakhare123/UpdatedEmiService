@@ -15,6 +15,7 @@ namespace InterestService.Domain.Model
     public int  id { get; set; }
     public int loanId { get; set; }
     public int InstallmentNo { get; set; }
+
     public int Duedate { get; set; }
     public decimal EmiAmount { get; set; }
     public decimal PrincipalAmount { get; set; }

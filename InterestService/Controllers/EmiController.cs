@@ -53,5 +53,23 @@ namespace InterestService.Controllers
         }
 
 
+        [HttpGet("{loanId}")]
+        public async Task<IActionResult> GetEmiSchedules(int loanId)
+        {
+            var data = await emiservice.GetEmiSchedule(loanId);
+            var response = new ApiResponse<object>
+            {
+                Success = true,
+                StatusCode = 200,
+                Message = "Emi Schedule fetched successfully",
+                Data = data,
+                Errors = null,
+                Meta = new { Timestamp = DateTime.UtcNow }
+            };
+
+            return Ok(response);
+        }
+
+
     }
 }

@@ -111,5 +111,25 @@ namespace InterestService.Repository.Repository
       }
 
 
+        public async Task<List<EmiScheduleDto>> GetEmiSchedule(int loanId)
+        {
+            var data = await _context.EmiSchedules
+                                     .Where(x => x.loanId == loanId)
+                                     .ToListAsync();
+
+            var result = data.Select(x => new EmiScheduleDto
+            {
+                Id = x.id,
+                DueDate =x.Duedate,
+                EmiAmount = x.EmiAmount,
+                PrincipalComponent = x.PrincipalAmount,
+                InterestComponent = x.InterestAmount,
+                Status = x.PaymentStatus
+            }).ToList();
+
+            return result;
+        }
+
+
     }
 }

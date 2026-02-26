@@ -13,5 +13,7 @@ namespace InterestService.Application.Interfaces
     Task<List<EmischeduleResponse>> GenerateSchedule(EmiRequestDTO req);
     Task<List<LoanEmiSchedule>> GetEmischedule(int id);
 
+    Task<List<EmiScheduleDto>> GetEmiSchedule(int loanId);
+
   }
 }
